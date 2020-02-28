@@ -7,7 +7,7 @@ import {
   InputGroup
 } from "react-bootstrap";
 import { State, Topic } from "../../../App";
-import { getTopics, createTopic } from "../../../actions";
+import { getTopics, saveTopic } from "../../../actions";
 
 export interface CreateModalProps {
   state: State;
@@ -26,8 +26,8 @@ const CreateModal = (props: CreateModalProps) => {
     null
   );
 
-  const handleCreateTopic = (topic: Topic) => {
-    createTopic(apiUrl, topic).then(async _response => {
+  const handleSaveTopic = (topic: Topic) => {
+    saveTopic(apiUrl, topic).then(async _response => {
       const topics = await getTopics(apiUrl);
       setState({
         ...state,
@@ -92,7 +92,7 @@ const CreateModal = (props: CreateModalProps) => {
                 name: nameRef.current.value,
                 description: descriptionRef.current.value
               };
-              handleCreateTopic(topic);
+              handleSaveTopic(topic);
             }
 
             if (onHide) onHide();

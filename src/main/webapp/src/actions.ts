@@ -12,10 +12,21 @@ export const getTopics = (apiUrl: string) =>
       throw new Error(error);
     });
 
-export const updateTopic = (apiUrl: string, topic: Topic) =>
+export const getTopicById = (apiUrl: string, id: string) =>
   axios({
-    method: "put",
-    url: `${apiUrl}/${topic.id}`,
+    method: "get",
+    url: `${apiUrl}/${id}`,
+    responseType: "json"
+  })
+    .then(response => response.data)
+    .catch(error => {
+      throw new Error(error);
+    });
+
+export const saveTopic = (apiUrl: string, topic: Topic) =>
+  axios({
+    method: "post",
+    url: apiUrl,
     data: topic
   })
     .then(response => response)
@@ -30,28 +41,6 @@ export const deleteTopic = (apiUrl: string, topic: Topic) =>
     data: topic
   })
     .then(response => response)
-    .catch(error => {
-      throw new Error(error);
-    });
-
-export const createTopic = (apiUrl: string, topic: Topic) =>
-  axios({
-    method: "post",
-    url: apiUrl,
-    data: topic
-  })
-    .then(response => response)
-    .catch(error => {
-      throw new Error(error);
-    });
-
-export const getTopicById = (apiUrl: string, id: string) =>
-  axios({
-    method: "get",
-    url: `${apiUrl}/${id}`,
-    responseType: "json"
-  })
-    .then(response => response.data)
     .catch(error => {
       throw new Error(error);
     });

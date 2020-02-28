@@ -7,7 +7,7 @@ import {
   InputGroup
 } from "react-bootstrap";
 import { Topic, State } from "../../../App";
-import { updateTopic, getTopics } from "../../../actions";
+import { saveTopic, getTopics } from "../../../actions";
 
 export interface EditModalProps {
   topic: Topic;
@@ -26,8 +26,8 @@ const EditModal = (props: EditModalProps) => {
     null
   );
 
-  const handleUpdateTopic = (updatedTopic: Topic) => {
-    updateTopic(apiUrl, updatedTopic).then(async _response => {
+  const handleSaveTopic = (updatedTopic: Topic) => {
+    saveTopic(apiUrl, updatedTopic).then(async _response => {
       const topics = await getTopics(apiUrl);
       setState({
         ...state,
@@ -96,7 +96,7 @@ const EditModal = (props: EditModalProps) => {
             }
 
             if (hasChanged) {
-              handleUpdateTopic(updatedTopic);
+              handleSaveTopic(updatedTopic);
             }
 
             if (onHide) onHide();
