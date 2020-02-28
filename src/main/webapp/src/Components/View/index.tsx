@@ -31,7 +31,7 @@ const View = (props: Props) => {
 
   return (
     <Container>
-      <Row>
+      <Row style={{ justifyContent: "space-between" }}>
         {topics.map(topic => (
           <TopicCard
             {...{

@@ -27,13 +27,21 @@ const TopicCard = (props: TopicCardProps) => {
   };
 
   return (
-    <Card style={{ margin: "10px 10px 10px 0" }}>
-      <Card.Body>
-        <Card.Title>{name}</Card.Title>
-        <Card.Text>{description}</Card.Text>
+    <Card style={{ margin: "10px 0", maxWidth: "370px" }}>
+      <Card.Body
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between"
+        }}
+      >
+        <div>
+          <Card.Title>{name}</Card.Title>
+          <Card.Text>{description}</Card.Text>
+        </div>
         <ButtonToolbar
           className={css({ button: { marginLeft: "10px" } })}
-          style={{ justifyContent: "flex-end" }}
+          style={{ justifyContent: "flex-end", marginTop: "10px" }}
         >
           <Button
             variant="outline-success"
