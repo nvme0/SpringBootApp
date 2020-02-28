@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Topic, State } from "../../App";
+import { Topic, State, PayloadRef } from "../../App";
 import { Container, Row } from "react-bootstrap";
 import { deleteTopic, getTopics } from "../../actions";
 import EditModal from "./Components/EditModal";
@@ -9,10 +9,11 @@ import CreateModal from "./Components/CreateModal";
 export interface Props {
   state: State;
   setState: React.Dispatch<React.SetStateAction<State>>;
+  payloadRef?: PayloadRef;
 }
 
 const View = (props: Props) => {
-  const { state, setState } = props;
+  const { state, setState, payloadRef } = props;
   const { topics, apiUrl, view } = state;
 
   const [selectedTopic, setSelectedTopic] = useState<Topic | undefined>();
@@ -39,7 +40,8 @@ const View = (props: Props) => {
               key: topic.id,
               topic,
               setSelectedTopic,
-              deleteTopic: handleDeleteTopic
+              deleteTopic: handleDeleteTopic,
+              payloadRef
             }}
           />
         ))}

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, RefObject } from "react";
 import { hot } from "react-hot-loader/root";
 import "regenerator-runtime/runtime";
 import NavigationBar from "./Components/NavigationBar";
@@ -6,6 +6,7 @@ import ActionButtons from "./Components/ActionButtons";
 import ResponsePayloadTextarea from "./Components/ResponsePayloadTextarea";
 import View from "./Components/View";
 import { getTopics } from "./actions";
+import { Container } from "react-bootstrap";
 
 export type Topic = { id: string; name: string; description: string };
 
@@ -16,6 +17,9 @@ export interface State {
   responsePayload?: string;
 }
 
+export type PayloadRef = RefObject<Container<"div">> &
+  RefObject<HTMLDivElement>;
+
 const App = () => {
   const [state, setState] = useState<State>({
     view: "listAll",
@@ -23,6 +27,7 @@ const App = () => {
     topics: []
   });
   const [hasInitialized, setHasInitialized] = useState(false);
+  const payloadRef = useRef() as PayloadRef;
 
   const { responsePayload } = state;
 
@@ -43,9 +48,9 @@ const App = () => {
   return (
     <div className="App">
       <NavigationBar />
-      <ActionButtons {...{ state, setState }} />
-      <View {...{ state, setState }} />
-      <ResponsePayloadTextarea {...{ responsePayload }} />
+      <ActionButtons {...{ state, setState, payloadRef }} />
+      <View {...{ state, setState, payloadRef }} />
+      <ResponsePayloadTextarea {...{ responsePayload, payloadRef }} />
       <div style={{ height: "200px", backgroundColor: "#343a40" }} />
     </div>
   );

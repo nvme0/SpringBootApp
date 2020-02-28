@@ -1,8 +1,9 @@
 import React from "react";
-import { Topic, State } from "../../../App";
+import { Topic, State, PayloadRef } from "../../../App";
 import { css } from "emotion";
 import { Card, Button, ButtonToolbar } from "react-bootstrap";
 import { getTopicById } from "../../../actions";
+import { scrollToRef } from "../../../helpers";
 
 export interface TopicCardProps {
   topic: Topic;
@@ -10,15 +11,24 @@ export interface TopicCardProps {
   setState: React.Dispatch<React.SetStateAction<State>>;
   setSelectedTopic: React.Dispatch<React.SetStateAction<Topic | undefined>>;
   deleteTopic: (topic: Topic) => void;
+  payloadRef?: PayloadRef;
 }
 
 const TopicCard = (props: TopicCardProps) => {
-  const { topic, setSelectedTopic, deleteTopic, state, setState } = props;
+  const {
+    topic,
+    setSelectedTopic,
+    deleteTopic,
+    state,
+    setState,
+    payloadRef
+  } = props;
   const { id, name, description } = topic;
   const { apiUrl } = state;
 
   const handleGetByIdButtonOnClick = () => {
     getTopicById(apiUrl, id).then(async data => {
+      scrollToRef(payloadRef);
       setState({
         ...state,
         responsePayload: JSON.stringify(data, undefined, 2)

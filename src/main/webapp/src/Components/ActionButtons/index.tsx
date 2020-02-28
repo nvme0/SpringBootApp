@@ -2,19 +2,22 @@ import React from "react";
 import { css } from "emotion";
 import { Container, Row, Button, ButtonToolbar } from "react-bootstrap";
 import { getTopics } from "../../actions";
-import { State } from "../../App";
+import { State, PayloadRef } from "../../App";
+import { scrollToRef } from "../../helpers";
 
 export interface Props {
   state: State;
   setState: React.Dispatch<React.SetStateAction<State>>;
+  payloadRef?: PayloadRef;
 }
 
 const ActionButtons = (props: Props) => {
-  const { state, setState } = props;
+  const { state, setState, payloadRef } = props;
   const { apiUrl } = state;
 
   const handleGetTopics = async () => {
     const topics = await getTopics(apiUrl);
+    scrollToRef(payloadRef);
     setState({
       ...state,
       view: "listAll",
