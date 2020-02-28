@@ -10,8 +10,19 @@ _The React frontend is just a tool used to quickly develop a nice UI, it can eas
 
 ## Installation
 
-```#!/bin/bash
+```bash
 git clone git@github.com:nvme0/SpringBootApp.git
+```
+
+### Configuring MongoDB
+
+Add the following lines to src/main/resources/application.properties.
+Replace `<databaseURI>` with your database URI.
+Replace `<databaseNmae>` with the name of your database, the app will create it if it doesn't exist.
+
+```config
+spring.data.mongodb.uri=<databaseURI>
+spring.data.mongodb.database=<databaseNmae>
 ```
 
 ## Usage
@@ -29,14 +40,14 @@ When you have Spring-boot extension installed, you will see a tab in the explore
 
 ## System Requirements
 
-Mandatory
+### Mandatory
 
 - Java SE installed on your system
-- An modern web browser that is up to date (Firefox, Chrome, Brave, Safari, Opera etc)
+- A modern web browser that is up to date (Firefox, Chrome, Brave, Safari, Opera etc)
 
-Optional
+### Optional
 
-- Node Package Manager (npm) to build React frontend. It comes prebuilt with this repo.
+- Node Package Manager (npm) to build React frontend. The frontend comes prebuilt with this repo.
 
 ## Technologies Used
 

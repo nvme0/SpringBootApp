@@ -1,6 +1,7 @@
 package com.backend.app.api.topics;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -12,35 +13,31 @@ import org.springframework.web.bind.annotation.RestController;
 
 @CrossOrigin(origins = "*")
 @RestController
+@RequestMapping("/api")
 public class TopicsController {
 
   // inject topic service
   @Autowired
   private TopicService topicService;
 
-  @RequestMapping("/api/topics")
+  @RequestMapping("/topics")
   public List<Topic> getAllTopics() {
     // The browser will recieve this as a JSON object
     // The conversion to JSON happens automatically when using the RestController
     return topicService.getAllTopics();
   }
 
-  @RequestMapping("/api/topics/{id}")
-  public Topic getTopic(@PathVariable String id) {
+  @RequestMapping("/topics/{id}")
+  public Optional<Topic> getTopic(@PathVariable String id) {
     return topicService.getTopic(id);
   }
 
-  @RequestMapping(method = RequestMethod.POST, value = "/api/topics")
-  public void addTopic(@RequestBody Topic topic) {
-    topicService.addTopic(topic);
+  @RequestMapping(method = RequestMethod.POST, value = "/topics")
+  public void saveTopic(@RequestBody Topic topic) {
+    topicService.saveTopic(topic);
   }
 
-  @RequestMapping(method = RequestMethod.PUT, value = "/api/topics/{id}")
-  public void updateTopic(@PathVariable String id, @RequestBody Topic topic) {
-    topicService.updateTopic(id, topic);
-  }
-
-  @RequestMapping(method = RequestMethod.DELETE, value = "/api/topics/{id}")
+  @RequestMapping(method = RequestMethod.DELETE, value = "/topics/{id}")
   public void deleteTopic(@PathVariable String id) {
     topicService.deleteTopic(id);
   }

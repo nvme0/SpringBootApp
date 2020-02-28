@@ -1,6 +1,11 @@
 package com.backend.app.api.topics;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document(collection = "Topics")
 public class Topic {
+  @Id
   private String id;
   private String name;
   private String description;
